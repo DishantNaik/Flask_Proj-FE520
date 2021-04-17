@@ -15,5 +15,6 @@ of any company.
 
 # How to run:
 1. Clone the repository
-2. Open Terminal to direct to folder Flask_Proj-FE520/
-3. Run - python app.py
+2. Open Terminal and install the dependencies
+3. Go to folder Flask_Proj-FE520/
+4. Run - python app.py
