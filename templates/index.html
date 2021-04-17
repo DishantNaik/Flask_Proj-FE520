@@ -1,10 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{stk_name}}
+<h3>APPLE</h3>
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">{{stk_info[0][0]}}</h5>
+    <h5 class="card-title">{{stk_info_apple[0][0]}}</h5>
+  </div>
+</div>
+<h3>AMAZON</h3>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{stk_info_amazon[0][0]}}</h5>
+  </div>
+</div>
+<h3>BTC-USD</h3>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{stk_info_btc[0][0]}}</h5>
+  </div>
+</div>
+<h3>PFIZER</h3>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{stk_info_pfizer[0][0]}}</h5>
+  </div>
+</div>
+<h3>CLOVER HEALTH</h3>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{stk_info_clover[0][0]}}</h5>
   </div>
 </div>
 {% endblock %}

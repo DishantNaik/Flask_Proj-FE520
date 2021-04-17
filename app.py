@@ -25,9 +25,14 @@ def stock():
 @app.route('/')
 def index():
     
-    stk_info, stk_name = [], ''
-    stk_info = get_today("BTC-USD", '2021-04-17')
-    return render_template('index.html', stk_name = 'BTC-USD', stk_info = stk_info.values)
+    stk_info_apple, stk_info_btc, stk_info_clover, stk_info_amazon, stk_info_pfizer = [], [], [], [], []
+    stk_info_apple = get_today("AAPL", '2021-04-17')
+    stk_info_btc = get_today("BTC-USD", '2021-04-17')
+    stk_info_amazon = get_today("AMZN", '2021-04-17')
+    stk_info_clover = get_today("CLOV", '2021-04-17')
+
+    stk_info_pfizer = get_today("PFE", '2021-04-17')
+    return render_template('index.html', stk_info_apple = stk_info_apple.values, stk_info_pfizer = stk_info_pfizer.values, stk_info_btc = stk_info_btc.values, stk_info_clover = stk_info_clover.values, stk_info_amazon = stk_info_amazon.values)
 
 if __name__ == '__main__':
    app.run(debug=True)
