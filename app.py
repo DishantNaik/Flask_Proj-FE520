@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 import sqlite3
-from stk_data import get_data_by_date, get_today
+from stk_data import get_data_by_date, get_current_data
 
 app = Flask(__name__)
 
@@ -26,12 +26,13 @@ def stock():
 def index():
     
     stk_info_apple, stk_info_btc, stk_info_clover, stk_info_amazon, stk_info_pfizer = [], [], [], [], []
-    stk_info_apple = get_today("AAPL", '2021-04-17')
-    stk_info_btc = get_today("BTC-USD", '2021-04-17')
-    stk_info_amazon = get_today("AMZN", '2021-04-17')
-    stk_info_clover = get_today("CLOV", '2021-04-17')
 
-    stk_info_pfizer = get_today("PFE", '2021-04-17')
+    stk_info_apple = get_current_data("AAPL")
+    stk_info_btc = get_current_data("BTC-USD")
+    stk_info_amazon = get_current_data("AMZN")
+    stk_info_clover = get_current_data("CLOV")
+    stk_info_pfizer = get_current_data("PFE")
+    
     return render_template('index.html', stk_info_apple = stk_info_apple.values, stk_info_pfizer = stk_info_pfizer.values, stk_info_btc = stk_info_btc.values, stk_info_clover = stk_info_clover.values, stk_info_amazon = stk_info_amazon.values)
 
 if __name__ == '__main__':
