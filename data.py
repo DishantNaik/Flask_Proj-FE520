@@ -16,7 +16,7 @@ def get_current_data(stock_code):
     df = d.history(start=dt.datetime.today(), end=dt.datetime.today())
     return df
 
-da = get_data_by_date('AAPL','2017-04-22','2018-04-22')
+da = get_data_by_date('AAPL','2017-04-22','2021-04-24')
 # da = get_current_data('AAPL')
 
-da.to_csv('da.csv')
+da.to_csv('dat.csv')
