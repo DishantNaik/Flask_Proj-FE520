@@ -1,6 +1,48 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h3 class='stk-title'>{{stk_info['longName']}}({{stk_info['symbol']}})</h3>
+
+<div id="stock-info">
+  
+  <div id="stock-left-col">
+    <div class="tableLine">
+      <div class="label">Prev Close:</div>
+      <div class="value stockPrevClose">{{stk_info['previousClose']}}</div>
+    </div>
+    <div class="tableLine">
+      <div class="label">Open:</div>
+      <div class="value stockOpen">{{stk_info['open']}}</div>
+    </div>
+    <div class="tableLine">
+      <div class="label">Bid:</div>
+      <div class="value stockBid">{{stk_info['bid']}}</div>
+    </div>
+    <div class="tableLine">
+      <div class="label">Ask:</div>
+      <div class="value stockAsk">{{stk_info['ask']}}</div>
+    </div>
+    <div class="tableLine">
+      <div class="label">Beta 3 Year</div>
+      <div class="value stockTargetEst">{{stk_info['beta3Year']}}</div>
+    </div>
+  </div>
+  
+  <div id="stock-right-col">
+    <div class="tableLine">
+      <div class="label">Avg Volume: </div>
+      <div class="value stockVolume">{{stk_info['averageVolume']}}</div>
+    </div>
+    <div class="tableLine">
+      <div class="label">Market Cap:</div>
+      <div class="value stockMarketCap">{{stk_info['marketCap']}}</div>
+    </div>
+  </div>
+  
+</div>
+
+<section><div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div></section>
+
 <table class="table table-striped table-sm">
             <thead>
                 <tr>
@@ -10,7 +52,7 @@
                 </tr>
               </thead>
             <tbody>
-            {% for value in stk_info %}
+            {% for value in hist_data %}
                 <tr>
                   <td>{{ value[0] }}</td>
                   <td>{{ value[1] }}</td>
@@ -19,4 +61,14 @@
             {% endfor %}
           </tbody>
           </table>
+
+<script>
+  var trace = {
+    x = [123,34,233,4,43,32],
+    y = [3,5,7,8,5,4],
+    type: 'scatter'
+  }
+  var data = [trace]
+  Plotly.newPlot('myDiv', trace)
+</script>
 {% endblock %}
