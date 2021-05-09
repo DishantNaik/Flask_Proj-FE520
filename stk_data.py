@@ -24,17 +24,18 @@ def get_current_data(stock_code):
 
 # get_data_by_date('amzn','2017-04-22','2021-05-02')
 
-# dayHigh 
-# dayLow
-# averageVolumne
+# dayHigh* 
+# dayLow*
+# volume*
+# averageVolumne*
 # averageVolumne10days
 # exchangeTimezoneName
-# marketCap
-# ask
-# bid
+# marketCap*
+# ask*
+# bid*
 # bidSize
 # beta
-# beta3Year
-# open
-# previousClose
+# beta3Year*
+# open*
+# previousClose*
 # symbol

@@ -11,6 +11,9 @@ h1 {
     padding: 10px;
 }
 
+.card {
+  border: 0px;
+}
 img{
     padding: 3rem;
     object-fit: contain;
@@ -20,13 +23,25 @@ img{
 .card:hover {
 	transform: scale(1.035, 1.035);
 	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-    transition-duration: 0.3s;
-}
-.card-body{
-    background: grey;
-    color: white;
+  transition-duration: 0.3s;
 }
 
+.card-title{
+  border: 1px solid black;
+  border-radius: 1rem;
+  padding: 7px;
+  display: -webkit-inline-box;
+}
+
+.card-body{
+    background: lightgray;
+    color: black;
+}
+
+.stk-title{
+  padding: 18px;
+  font-weight: bold;
+}
 #stock-info{
     width: 60%;
     min-width: 550px;
@@ -60,5 +75,8 @@ img{
     margin-bottom: 20px;
   }
   .label{float:left; margin-left: 30px;}
-  .value{float:right; margin-right: 30px;}
-  
+  .value{float:right; margin-right: 30px; font-weight: bold;}
+
+  .val{
+    font-weight: bold;
+  }
