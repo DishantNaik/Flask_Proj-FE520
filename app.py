@@ -40,14 +40,16 @@ def index():
 
 @app.route('/plot')
 def plot():
-    # df = read_csv('dat.csv)
-    # fig = go.Figure(go.Scatter(x = df['Date'], y = df['Close'],
-    #                 name='Share Prices (in USD)'))
+    df = pd.read_csv('dat.csv')
+    fig = go.Figure(go.Scatter(x = df['Date'], y = df['Close'],
+                    name='Share Prices (in USD)'))
 
-    # fig.update_layout(title='Share Prices over time (2017-2021)',
-    #                 plot_bgcolor='rgb(230, 230,230)',
-    #                 showlegend=True)
+    fig.update_layout(title='Share Prices over time (2017-2021)',
+                    plot_bgcolor='rgb(230, 230,230)',
+                    showlegend=True)
+
     
-    return render_template('plot.html')
+    
+    return render_template('plot.html', plot = fig)
 if __name__ == '__main__':
    app.run(debug=True)
