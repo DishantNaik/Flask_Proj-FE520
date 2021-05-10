@@ -2,8 +2,8 @@ from flask import Flask, render_template, request
 import sqlite3
 from stk_data import get_data_by_date, get_current_data
 import pandas as pd
-import plotly.graph_objects as go
-from flask_jsonpify import jsonpify
+# import plotly.graph_objects as go
+# from flask_jsonpify import jsonpify
 
 app = Flask(__name__)
 
@@ -40,13 +40,13 @@ def index():
 
 @app.route('/plot')
 def plot():
-    df = pd.read_csv('dat.csv')
-    fig = go.Figure(go.Scatter(x = df['Date'], y = df['Close'],
-                    name='Share Prices (in USD)'))
+    # df = pd.read_csv('dat.csv')
+    # fig = go.Figure(go.Scatter(x = df['Date'], y = df['Close'],
+    #                 name='Share Prices (in USD)'))
 
-    fig.update_layout(title='Share Prices over time (2017-2021)',
-                    plot_bgcolor='rgb(230, 230,230)',
-                    showlegend=True)
+    # fig.update_layout(title='Share Prices over time (2017-2021)',
+    #                 plot_bgcolor='rgb(230, 230,230)',
+    #                 showlegend=True)
 
     
     
