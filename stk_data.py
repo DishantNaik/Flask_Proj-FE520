@@ -16,6 +16,7 @@ def get_data_by_date(stock_code,start_date, end_date):
     df = d.history(start=start_date, end=end_date)
 
     df['Date'] = df.index
+    df['Date'] = df['Date'].dt.date
     df['Change'] = (df['Close'].diff())
     df['% Change'] = (df['Close'].pct_change() * 100)
 

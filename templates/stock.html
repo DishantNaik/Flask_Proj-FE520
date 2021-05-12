@@ -1,8 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a href='/plot'>Plot</a>
-<h3 class='stk-title'>{{stk_info['longName']}}({{stk_info['symbol']}})</h3>
+<h2 class='stk-title'>{{stk_info['longName']}}({{stk_info['symbol']}})</h2>
+  <div class='tit'>
+    <h4><span id='open'>{{stk_info['open']}}</span> <span id='chng'>{{'%0.2f'| format(hist_data[0][8]|float)}}</span> <span id='perchng'>({{'%0.2f'| format(hist_data[0][9]|float)}}%)</span></h4>
+    <script>
+          var elem = document.getElementById('chng')
+          var elem_val = document.getElementById('chng').innerText;
+
+          var ew =   document.getElementById('perchng')
+          var ew_val = document.getElementById('perchng').innerText;
+
+          var x = parseInt(elem_val)
+
+          if(x<0) {
+              if (elem.className == 'green'){
+                elem.className += "red";
+              }
+          }
+          if(x>0) {
+              if(elem.className == 'red'){
+                elem.className += "green";
+              }
+          }
+      </script> 
+  </div>
 
 <div id="stock-info">
   
@@ -51,38 +73,36 @@
       <div class="value stockDayLow">{{stk_info['dayLow']}}</div>
     </div>
   </div>
-  
+
 </div>
 
 
 <table class="table table-striped table-sm">
-            <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Open</th>
-                  <th>High</th>
-                  <th>Low</th>
-                </tr>
-              </thead>
-            <tbody>
-            {% for value in hist_data %}
-                <tr>
-                  <td>{{ value[index] }}</td>
-                  <td>{{ value[0] }}</td>
-                  <td>{{ value[1] }}</td>
-                  <td>{{ value[2] }}</td>
-                </tr>
-            {% endfor %}
-          </tbody>
-          </table>
-
-<script>
-  var trace = {
-    x = [123,34,233,4,43,32],
-    y = [3,5,7,8,5,4],
-    type: 'scatter'
-  }
-  var data = [trace]
-  Plotly.newPlot('myDiv', trace)
-</script>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Close</th>
+      <th>Volume</th>
+      <th>Change</th>
+      <th>%Change</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for value in hist_data %}
+    <tr>
+      <td>{{ value[7] }}</td>
+      <td>{{'%0.2f'| format(value[0]|float)}}</td>
+      <td>{{'%0.2f'| format(value[1]|float)}}</td>
+      <td>{{'%0.2f'| format(value[2]|float)}}</td>
+      <td>{{'%0.2f'| format(value[3]|float)}}</td>
+      <td>{{'%0.2f'| format(value[4]|float)}}</td>
+      <td>{{'%0.2f'| format(value[8]|float)}}</td>
+      <td>{{'%0.2f'| format(value[9]|float)}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}
