@@ -12,9 +12,9 @@ def stock():
     stk_info = []
     if request.method == 'POST':
         search = request.form.get('key')
-        stk_info, hist_data = get_data_by_date(search, '2017-04-22','2021-05-02')
+        stk_info, hist_data = get_data_by_date(search, '2017-04-22','2021-05-10')
 
-    df = pd.read_csv('dat.csv')
+    # df = pd.read_csv('dat.csv')
     # df_list = list(df.values.flatten())
     # date_df: list = df['Date']
     # close_df: list = df['Close']
