@@ -1,9 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
-from stk_data import get_data_by_date, get_current_data
+from stk_data import get_data_by_date, get_current_data, MACD_NACDline, Stock_Line, Stock_Candel, RSI_calc, SMA_cal
 import pandas as pd
-# import plotly.graph_objects as go
-# from flask_jsonpify import jsonpify
 
 app = Flask(__name__)
 
@@ -12,15 +10,14 @@ def stock():
     stk_info = []
     if request.method == 'POST':
         search = request.form.get('key')
-        stk_info, hist_data = get_data_by_date(search, '2017-04-22','2021-05-10')
+        stk_info, hist_data = get_data_by_date(search)
+        rsi = RSI_calc(search)
+        sma = SMA_cal(search)
+        MACD_NACDline(search)
+        Stock_Line(search)
+        Stock_Candel(search)
 
-    # df = pd.read_csv('dat.csv')
-    # df_list = list(df.values.flatten())
-    # date_df: list = df['Date']
-    # close_df: list = df['Close']
-    # print(list(date_df))
-
-    return render_template('stock.html', search = search, stk_info = stk_info, hist_data = hist_data.values)
+    return render_template('stock.html', search = search, stk_info = stk_info, hist_data = hist_data.values, rsi = rsi, sma = sma)
 
 
 @app.route('/')
@@ -38,18 +35,30 @@ def index():
     
     return render_template('index.html', stk_info_walmart = round(stk_info_walmart.values[0][0],2), stk_info_netflix = round(stk_info_netflix.values[0][0],2), stk_info_google = round(stk_info_google.values[0][0], 2), stk_info_apple = round(stk_info_apple.values[0][0], 2), stk_info_pfizer = round(stk_info_pfizer.values[0][0], 2), stk_info_btc = round(stk_info_btc.values[0][0], 2), stk_info_clover = round(stk_info_clover.values[0][0],2), stk_info_amazon = round(stk_info_amazon.values[0][0], 2), stk_info_tesla = round(stk_info_tesla.values[0][0], 2))
 
-@app.route('/plot')
-def plot():
-    # df = pd.read_csv('dat.csv')
-    # fig = go.Figure(go.Scatter(x = df['Date'], y = df['Close'],
-    #                 name='Share Prices (in USD)'))
 
-    # fig.update_layout(title='Share Prices over time (2017-2021)',
-    #                 plot_bgcolor='rgb(230, 230,230)',
-    #                 showlegend=True)
+@app.route('/plotmacd')
+def plotmacd():
+    return redirect(url_for('macd'))
 
+@app.route('/plotline')
+def plotline():
+    return redirect(url_for('line'))
+
+@app.route('/plotcandle')
+def plotcandle():
+    return redirect(url_for('candle'))
+
+@app.route('/macd')
+def macd():
+    return render_template('plots/macd.html')
+
+@app.route('/line')
+def line():
+    return render_template('plots/line.html')
     
-    
-    return render_template('plot.html', plot = fig)
+@app.route('/candle')
+def candle():
+    return render_template('plots/candle.html')
+
 if __name__ == '__main__':
    app.run(debug=True)
