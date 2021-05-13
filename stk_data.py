@@ -202,11 +202,11 @@ def buy_sell(st_name):
         if (rsi <= 30):
             return('Oversold')
         elif (rsi <= 35):
-            return('Buy')
+            return('BUY')
         elif (rsi >= 70):
-            print('Overbought')
+            print('OVERBOUGHT')
         elif (rsi >= 65):
-            return('sell')
+            return('SELL')
 
     else:
 
@@ -222,24 +222,7 @@ def buy_sell(st_name):
         sell = newX[newX['buy/sell'] == -1].shape[0]
 
         if (buy > sell):
-            return('buy')
+            return('BUY')
         else:
-            return('sell')
+            return('SELL')
 
-# get_data_by_date('amzn','2017-04-22','2021-05-02')
-
-# dayHigh* 
-# dayLow*
-# volume*
-# averageVolumne*
-# averageVolumne10days
-# exchangeTimezoneName
-# marketCap*
-# ask*
-# bid*
-# bidSize
-# beta
-# beta3Year*
-# open*
-# previousClose*
-# symbol
