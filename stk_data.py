@@ -6,14 +6,15 @@ import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure
 import plotly.offline as pyo
 import plotly.graph_objs as go
+import plotly.express as px
 
 
 
-def get_data_by_date(stock_code,start_date, end_date):
+def get_data_by_date(stock_code):
 
     d = yf.Ticker(stock_code)
 
-    df = d.history(start=start_date, end=end_date)
+    df = d.history(period='3y')
 
     df['Date'] = df.index
     df['Date'] = df['Date'].dt.date
@@ -21,15 +22,12 @@ def get_data_by_date(stock_code,start_date, end_date):
     df['% Change'] = (df['Close'].pct_change() * 100)
 
     df = df.reindex(index=df.index[::-1])
-    # pprint.pprint(d.info)
-    # df.to_csv('dat.csv')
     return d.info, df
 
 def get_current_data(stock_code):
 
     d = yf.Ticker(stock_code)
 
-    # print(d.info)
     df = d.history(period = '1d')
     df['Date'] = df.index
     df['Change'] = (df['Close'].diff())
@@ -110,12 +108,12 @@ def MACD_NACDline(st_name):
     )
 
     data  = [trace0, trace1]
-    layout = go.Layout(title='hahaha')
+    layout = go.Layout(title=f"MACD Chart for {st_name.upper()}")
 
     fig = go.Figure(data=data, layout=layout)
 
-    # pyo.plot(fig)
-    return fig
+    fig.write_html("./templates/plots/macd.html")
+
 
 def Stock_Line(st_name):
 
@@ -131,7 +129,7 @@ def Stock_Line(st_name):
     )
 
     data  = [trace0]
-    layout = go.Layout(title='hahaha')
+    layout = go.Layout(title=f"Line Chart for {st_name.upper()}")
 
     fig = go.Figure(data=data, layout=layout)
     fig.update_layout(xaxis_range=[df1.index.min(),df1.index.max()])
@@ -151,9 +149,8 @@ def Stock_Line(st_name):
             )
     )
 
+    fig.write_html("./templates/plots/line.html")
 
-    # pyo.plot(fig)
-    return fig
 
 def Stock_Candel(st_name):
     dd = yf.Ticker(st_name)
