@@ -122,10 +122,10 @@ def Stock_Line(st_name):
     df1 = dd.history(period='1y')
 
     trace0 = go.Scatter(
-    x = df1.index,
-    y = df1.Close,
-    mode = 'lines',
-    name = 'Stock Line Chart' 
+        x = df1.index,
+        y = df1.Close,
+        mode = 'lines',
+        name = 'Stock Line Chart' 
     )
 
     data  = [trace0]
@@ -159,17 +159,87 @@ def Stock_Candel(st_name):
 
 
 
-    fig = go.Figure( data=[ 
-                    go.Candlestick(
-                    x = df1.index,
-                    low = df1['Low'],
-                    high = df1['High'],
-                    open = df1['Open'],
-                    close = df1['Close'],
-                    increasing_line_color = 'green',
-                    decreasing_line_color = 'red'
+    fig = go.Figure( data=[
+                            go.Candlestick(
+                            x = df1.index,
+                            low = df1['Low'],
+                            high = df1['High'],
+                            open = df1['Open'],
+                            close = df1['Close'],
+                            increasing_line_color = 'green',
+                            decreasing_line_color = 'red'
+                            )
+                        ]
                     )
-    ])
     fig.update_layout(xaxis_range=[df1.index.min(),df1.index.max()])
     
-    fig.write_html("./templates/plots/candle.html")
+    return fig
+
+def set_val(ro):
+  if ro['diff'] > 0 and ro['shift'] < 0:
+    return 1
+  if ro['diff'] < 0 and ro['shift'] > 0:
+    return -1
+  return 0
+
+def buy_sell(st_name):
+
+    dd = yf.Ticker(st_name)
+        
+    df1 = dd.history(period='6mo')
+
+    exp1 = df1.Close.ewm(span=12, adjust=False).mean()
+    exp2 = df1.Close.ewm(span=26, adjust=False).mean()
+    macd = exp1 - exp2
+
+    exp3 = macd.ewm(span=9, adjust=False).mean() 
+
+    macd_diff = macd - exp3
+
+    rsi = RSI_calc(st_name)
+    # get MACD_diff
+    if (rsi <= 30 or rsi >= 70):
+        if (rsi <= 30):
+            return('Oversold')
+        elif (rsi <= 35):
+            return('Buy')
+        elif (rsi >= 70):
+            print('Overbought')
+        elif (rsi >= 65):
+            return('sell')
+
+    else:
+
+        newX = pd.DataFrame()
+        newX['diff'] = macd_diff
+        newX['shift'] = macd_diff.shift(-1)
+        newX['buy/sell'] = 0
+        # newX
+        # newX['buy/sell'] = newX.apply(lambda x : 1 if (x['diff'] > 0 and x['shift'] < 0) else -1 )
+        newX['buy/sell'] = newX.apply(lambda ro : set_val(ro), axis=1)
+
+        buy = newX[newX['buy/sell'] == 1].shape[0]
+        sell = newX[newX['buy/sell'] == -1].shape[0]
+
+        if (buy > sell):
+            return('buy')
+        else:
+            return('sell')
+
+# get_data_by_date('amzn','2017-04-22','2021-05-02')
+
+# dayHigh* 
+# dayLow*
+# volume*
+# averageVolumne*
+# averageVolumne10days
+# exchangeTimezoneName
+# marketCap*
+# ask*
+# bid*
+# bidSize
+# beta
+# beta3Year*
+# open*
+# previousClose*
+# symbol
