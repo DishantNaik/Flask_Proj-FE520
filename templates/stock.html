@@ -67,11 +67,13 @@
 
 </div>
 
-    <table class=' container bs'>
+    <table class='container-fluid bs'>
       <thead>
         <tr class='mytr'>
           <th class='myth'>RSI (30 days)</th>
           <th class='myth'>SMA (30 days)</th>
+          <th class='myth'>BEARISH MARKET TREND</th>
+          <th class='myth'>BULLISH MARKET TREND</th>
           <th class='myth'>BUY/SELL</th>
         </tr>
       </thead>
@@ -79,6 +81,8 @@
         <tr class='mytr'>
           <td class='mytd'>{{'%0.2f'| format(rsi|float)}}</td>
           <td class='mytd'>{{'%0.2f'| format(sma|float)}}</td>
+          <td class='mytd'>{{b_count}}</td>
+          <td class='mytd'>{{s_count}}</td>
           <td class='mytd'>{{bs}}</td>
         </tr>
       </tbody>
