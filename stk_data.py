@@ -85,7 +85,7 @@ def SMA_cal(st_name):
 def MACD_NACDline(st_name):
     dd = yf.Ticker(st_name)
         
-    df1 = dd.history(period='6mo')
+    df1 = dd.history(period='1y')
 
     exp1 = df1.Close.ewm(span=12, adjust=False).mean()
     exp2 = df1.Close.ewm(span=26, adjust=False).mean()
@@ -119,7 +119,7 @@ def Stock_Line(st_name):
 
     dd = yf.Ticker(st_name)
         
-    df1 = dd.history(period='6mo')
+    df1 = dd.history(period='1y')
 
     trace0 = go.Scatter(
     x = df1.index,
