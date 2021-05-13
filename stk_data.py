@@ -85,7 +85,7 @@ def SMA_cal(st_name):
 def MACD_NACDline(st_name):
     dd = yf.Ticker(st_name)
         
-    df1 = dd.history(period='6mo')
+    df1 = dd.history(period='1y')
 
     exp1 = df1.Close.ewm(span=12, adjust=False).mean()
     exp2 = df1.Close.ewm(span=26, adjust=False).mean()
@@ -119,7 +119,7 @@ def Stock_Line(st_name):
 
     dd = yf.Ticker(st_name)
         
-    df1 = dd.history(period='6mo')
+    df1 = dd.history(period='1y')
 
     trace0 = go.Scatter(
         x = df1.index,
@@ -202,11 +202,11 @@ def buy_sell(st_name):
         if (rsi <= 30):
             return('Oversold')
         elif (rsi <= 35):
-            return('Buy')
+            return('BUY')
         elif (rsi >= 70):
-            print('Overbought')
+            print('OVERBOUGHT')
         elif (rsi >= 65):
-            return('sell')
+            return('SELL')
 
     else:
 
@@ -222,24 +222,7 @@ def buy_sell(st_name):
         sell = newX[newX['buy/sell'] == -1].shape[0]
 
         if (buy > sell):
-            return('buy')
+            return('BUY')
         else:
-            return('sell')
+            return('SELL')
 
-# get_data_by_date('amzn','2017-04-22','2021-05-02')
-
-# dayHigh* 
-# dayLow*
-# volume*
-# averageVolumne*
-# averageVolumne10days
-# exchangeTimezoneName
-# marketCap*
-# ask*
-# bid*
-# bidSize
-# beta
-# beta3Year*
-# open*
-# previousClose*
-# symbol
