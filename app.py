@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
-from stk_data import get_data_by_date, get_current_data, MACD_NACDline, Stock_Line, Stock_Candel, RSI_calc, SMA_cal
+from stk_data import get_data_by_date, get_current_data, MACD_NACDline, Stock_Line, Stock_Candel, RSI_calc, SMA_cal, buy_sell
 import pandas as pd
 
 app = Flask(__name__)
@@ -16,8 +16,9 @@ def stock():
         MACD_NACDline(search)
         Stock_Line(search)
         Stock_Candel(search)
+        bs = buy_sell(search)
 
-    return render_template('stock.html', search = search, stk_info = stk_info, hist_data = hist_data.values, rsi = rsi, sma = sma)
+    return render_template('stock.html', search = search, stk_info = stk_info, hist_data = hist_data.values, rsi = rsi, sma = sma, bs = bs)
 
 
 @app.route('/')
