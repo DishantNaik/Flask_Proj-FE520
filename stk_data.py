@@ -196,35 +196,36 @@ def buy_sell(st_name):
 
     macd_diff = macd - exp3
 
+    newX = pd.DataFrame()
+    newX['diff'] = macd_diff
+    newX['shift'] = macd_diff.shift(-1)
+    newX['buy/sell'] = 0
+        # newX
+        # newX['buy/sell'] = newX.apply(lambda x : 1 if (x['diff'] > 0 and x['shift'] < 0) else -1 )
+    newX['buy/sell'] = newX.apply(lambda ro : set_val(ro), axis=1)
+
+    buy = newX[newX['buy/sell'] == 1].shape[0]
+    sell = newX[newX['buy/sell'] == -1].shape[0]
+
+
     rsi = RSI_calc(st_name)
+
     # get MACD_diff
     if (rsi <= 30 or rsi >= 70):
         if (rsi <= 30):
-            return('Oversold')
+            return('Oversold', buy, sell) 
         elif (rsi <= 35):
-            return('Buy')
+            return('Buy', buy, sell)
         elif (rsi >= 70):
-            print('Overbought')
+            print('Overbought', buy, sell)
         elif (rsi >= 65):
-            return('sell')
+            return('sell', buy, sell)
 
     else:
-
-        newX = pd.DataFrame()
-        newX['diff'] = macd_diff
-        newX['shift'] = macd_diff.shift(-1)
-        newX['buy/sell'] = 0
-        # newX
-        # newX['buy/sell'] = newX.apply(lambda x : 1 if (x['diff'] > 0 and x['shift'] < 0) else -1 )
-        newX['buy/sell'] = newX.apply(lambda ro : set_val(ro), axis=1)
-
-        buy = newX[newX['buy/sell'] == 1].shape[0]
-        sell = newX[newX['buy/sell'] == -1].shape[0]
-
         if (buy > sell):
-            return('buy')
+            return('buy', buy, sell)
         else:
-            return('sell')
+            return('sell', buy, sell)
 
 # get_data_by_date('amzn','2017-04-22','2021-05-02')
 
