@@ -115,21 +115,24 @@ img{
 .bs{
   text-align: center;
   width: 100%;
-  display: flex;
+  /* display: flex; */
   border-collapse: collapse;
   justify-content: center;
   padding: 2rem;
-}
-
-.mytr { 
-  display: block; 
-  float: left; 
-}
-
-.myth, .mytd { 
-  display: block;
   border: 1px solid black;
-  padding: 30px 100px 30px 100px;
+  margin-bottom: 3rem;
+}
+
+.myth { 
+  /* display: block;  */
+  /* float: left;  */
+  border: 1px solid black;
+}
+
+.mytd { 
+  /* display: block; */
+  border: 1px solid black;
+  padding: 10px 10px 10px 20px;
 }
 
 

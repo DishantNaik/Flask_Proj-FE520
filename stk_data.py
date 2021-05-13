@@ -219,13 +219,13 @@ def buy_sell(st_name):
         elif (rsi >= 70):
             print('Overbought', buy, sell)
         elif (rsi >= 65):
-            return('sell', buy, sell)
+            return('Sell', buy, sell)
 
     else:
         if (buy > sell):
-            return('buy', buy, sell)
+            return('Buy', buy, sell)
         else:
-            return('sell', buy, sell)
+            return('Sell', buy, sell)
 
 # get_data_by_date('amzn','2017-04-22','2021-05-02')
 

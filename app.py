@@ -16,9 +16,9 @@ def stock():
         MACD_NACDline(search)
         Stock_Line(search)
         Stock_Candel(search)
-        bs = buy_sell(search)
+        bs,b_count, s_count = buy_sell(search)
 
-    return render_template('stock.html', search = search, stk_info = stk_info, hist_data = hist_data.values, rsi = rsi, sma = sma, bs = bs)
+    return render_template('stock.html', search = search, stk_info = stk_info, hist_data = hist_data.values, rsi = rsi, sma = sma, bs = bs, b_count = b_count, s_count = s_count)
 
 
 @app.route('/')
