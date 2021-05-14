@@ -7,15 +7,18 @@ app = Flask(__name__)
 
 @app.route('/stock', methods=['post', 'get'])
 def stock():
+    """Invoke the search functionality to get the data
+        and generate plots as required"""
+    
     stk_info = []
     if request.method == 'POST':
         search = request.form.get('key')
         stk_info, hist_data = get_data_by_date(search)
-        rsi = RSI_calc(search)
-        sma = SMA_cal(search)
-        MACD_NACDline(search)
-        Stock_Line(search)
-        Stock_Candel(search)
+        rsi = RSI_calc(search) # RSI indicator calculated on stock name
+        sma = SMA_cal(search) # SMA indicator calculated on stock name
+        MACD_NACDline(search) # Generates MACD Plot
+        Stock_Line(search) # Generates Line Plot
+        Stock_Candel(search) # Generates Candle Plot
         bs,b_count, s_count = buy_sell(search)
 
     return render_template('stock.html', search = search, stk_info = stk_info, hist_data = hist_data.values, rsi = rsi, sma = sma, bs = bs, b_count = b_count, s_count = s_count)
@@ -23,6 +26,7 @@ def stock():
 
 @app.route('/')
 def index():
+    """Renderes the Landing page with some famous stock details"""
 
     stk_info_apple = get_current_data("AAPL")
     stk_info_btc = get_current_data("BTC-USD")
@@ -39,14 +43,17 @@ def index():
 
 @app.route('/plotmacd')
 def plotmacd():
+    """Calls the MACD function to rendered the given plot generated"""
     return redirect(url_for('macd'))
 
 @app.route('/plotline')
 def plotline():
+    """Calls the Line function to rendered the given plot generated"""
     return redirect(url_for('line'))
 
 @app.route('/plotcandle')
 def plotcandle():
+    """Calls the Candle function to rendered the given plot generated"""
     return redirect(url_for('candle'))
 
 @app.route('/macd')
