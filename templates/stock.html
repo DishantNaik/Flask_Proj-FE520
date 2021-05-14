@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!--Title-->
 <h2 class='stk-title'>{{stk_info['longName']}}({{stk_info['symbol']}})</h2>
+<!--Stock Current Value-->
 <div class='container tit'>
   <h4><span id='open'>{{stk_info['open']}}</span> <span id='chng'>{{'%0.2f'| format(hist_data[0][8]|float)}}</span> <span id='perchng'>({{'%0.2f'| format(hist_data[0][9]|float)}}%)</span></h4>
 </div>
-
+<!--Plots dropdown-->
 <div class="container dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     View Plot
@@ -16,7 +18,7 @@
     <a class="dropdown-item" href="/plotcandle">Candle</a>
   </div>
 </div>
-
+<!--More details about stock-->
 <div id="stock-info">
   
   <div id="stock-left-col">
@@ -66,7 +68,7 @@
   </div>
 
 </div>
-
+<!--Indicators-->
     <table class='container-fluid bs'>
       <thead>
         <tr class='mytr'>
@@ -88,7 +90,7 @@
       </tbody>
     </table>
 
-
+<!--Historical Data-->
 <div class='table-wrapper'>
   <table class="table table-striped table-sm">
     <thead>

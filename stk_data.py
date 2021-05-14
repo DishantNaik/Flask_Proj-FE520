@@ -11,6 +11,7 @@ import plotly.express as px
 
 
 def get_data_by_date(stock_code):
+    """Gets data using start date and end date"""
 
     d = yf.Ticker(stock_code)
 
@@ -25,6 +26,7 @@ def get_data_by_date(stock_code):
     return d.info, df
 
 def get_current_data(stock_code):
+    """Gets the most current data"""
 
     d = yf.Ticker(stock_code)
 
@@ -63,6 +65,8 @@ def RSI_calc(st_name):
     return RSI
 
 def SMA_cal(st_name):
+    """SMA indicator calculation"""
+
     dd = yf.Ticker(st_name)
         
     df1 = dd.history(period='30d')
@@ -83,6 +87,8 @@ def SMA_cal(st_name):
 #     return macd
 
 def MACD_NACDline(st_name):
+    """MACD PLOT"""
+
     dd = yf.Ticker(st_name)
         
     df1 = dd.history(period='1y')
@@ -116,6 +122,7 @@ def MACD_NACDline(st_name):
 
 
 def Stock_Line(st_name):
+    """LINE PLOT"""
 
     dd = yf.Ticker(st_name)
         
@@ -153,6 +160,8 @@ def Stock_Line(st_name):
 
 
 def Stock_Candel(st_name):
+    """CANDLE PLOT"""
+
     dd = yf.Ticker(st_name)
         
     df1 = dd.history(period='1y')
@@ -183,6 +192,7 @@ def set_val(ro):
   return 0
 
 def buy_sell(st_name):
+    """BUY/SELL RECOMMEDATION"""
 
     dd = yf.Ticker(st_name)
         
@@ -226,21 +236,3 @@ def buy_sell(st_name):
             return('Buy', buy, sell)
         else:
             return('Sell', buy, sell)
-
-# get_data_by_date('amzn','2017-04-22','2021-05-02')
-
-# dayHigh* 
-# dayLow*
-# volume*
-# averageVolumne*
-# averageVolumne10days
-# exchangeTimezoneName
-# marketCap*
-# ask*
-# bid*
-# bidSize
-# beta
-# beta3Year*
-# open*
-# previousClose*
-# symbol
