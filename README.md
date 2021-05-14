@@ -15,6 +15,12 @@ of any company.
 
 # How to run:
 1. Clone the repository
-2. Open Terminal and install the dependencies
+2. Open Terminal and install the dependencies - 
+   - pandas
+   - yfinance
+   - datetime
+   - matplotlib
+   - plotly
+   - flask
 3. Go to folder Flask_Proj-FE520/
 4. Run - python app.py
